@@ -16,8 +16,8 @@ public class Jugador {
     private int numeroOrden;
 
     public Jugador() {
-        this.nombreJugador = nombreJugador;
-        this.simboloJugador = simboloJugador;
+        this.nombreJugador = "";
+        this.simboloJugador = "";
         this.numeroOrden = 0;
     }
 

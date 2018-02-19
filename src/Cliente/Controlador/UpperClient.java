@@ -15,50 +15,43 @@ public class UpperClient {
     /**
      * Runs the client as an application.  
      */
-    public static void main(String[] args) throws IOException {
-        String sentence,modifiedSentence;
+    public static void main(String[] args) throws IOException, InterruptedException {
+        String sentence,cadenaRecuperada;
         /*String serverAddress = JOptionPane.showInputDialog(
             "Enter IP Address of a machine that is\n" +
             "running the upper service on port 9090:");*/
-        Socket s;
-        while(true){
-            s = new Socket("localhost", 9091);
-
-            System.out.println("Conexión iniciada");
-            try{
-                BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+        Socket s = new Socket();
+        /*while(true){
+            try{*/
+                s = new Socket("localhost", 9091);
+         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
                 DataOutputStream outToServer = new DataOutputStream(s.getOutputStream());
-                System.out.println("Introduce el texto que deseas convertir a Mayúscula:");
+                System.out.println("Acción a realizar: ");
                 BufferedReader inFromServer =
-                    new BufferedReader(new InputStreamReader(s.getInputStream()));
+                new BufferedReader(new InputStreamReader(s.getInputStream()));
                 sentence = inFromUser.readLine();
                 outToServer.writeBytes(sentence + '\n');
-                modifiedSentence = inFromServer.readLine();
-                System.out.println("From server: "+ modifiedSentence);
-                //sJOptionPane.showMessageDialog(null, modifiedSentence);
-                
-                if((modifiedSentence.toUpperCase()).compareTo("JUGADORES_CONECTADOS") == 0){
-                    System.out.println("Completos");
-                    //System.out.println("Ganador: " + inFromServer.readLine().charAt(inFromServer.readLine().length() - 1));
+                cadenaRecuperada = inFromServer.readLine();
+                System.out.println("From server: "+ cadenaRecuperada);
+                if (cadenaRecuperada !=  null){
+                    System.out.println(cadenaRecuperada);
+                } else{
+                    System.out.println("Sin respuesta del servidor...");
                 }
-                
-                /*if((modifiedSentence.toUpperCase()).contains("GANADOR")){
-                    System.out.println("Ganador: " + inFromServer.readLine().charAt(inFromServer.readLine().length() - 1));
-                    s.close();
-                    System.exit(0);
-                    break;
-                }*/
-                //s.close();
+                /*if((cadenaRecuperada.toUpperCase()).compareTo("JUGADORES_COMPLETOS") == 0){
+                    System.out.println("Completos");
+                } else */
+                    
+               
                 System.out.println("Conexión cerrada\n");
-                //System.exit(0);
-                
-            } finally{
+                Thread.sleep(1000);
+            //} finally{
                 s.close();
-            }
+                
+            //}
             
-        }
-        //Socket s = new Socket("localhost", 9090);
-        
+        //}
+         
     }
 }
 
