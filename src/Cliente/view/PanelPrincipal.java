@@ -6,6 +6,9 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import Cliente.controller.componentes.ComponentePanelResultado;
+
 import java.awt.Color;
 import java.awt.Font;
 
@@ -29,7 +32,7 @@ public class PanelPrincipal extends JPanel {
 		ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/Cliente/images/board.png"));
 		Icon backgroundIcono = new ImageIcon(backgroundImage.getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_DEFAULT));
 		
-		resultado = new PanelResultado();
+		resultado = new ComponentePanelResultado().getPanelResultado();
 		resultado.setLocation(50, 100);
 		add(resultado);
 		background.setIcon(backgroundIcono);
@@ -83,4 +86,49 @@ public class PanelPrincipal extends JPanel {
 		turno_jugador.setHorizontalAlignment(JLabel.CENTER);
 		add(turno_jugador);
 	}
+
+	public JLabel getTurno_jugador() {
+		return turno_jugador;
+	}
+
+	public JLabel getCoord_1a() {
+		return coord_1a;
+	}
+
+	public JLabel getCoord_1b() {
+		return coord_1b;
+	}
+
+	public JLabel getCoord_1c() {
+		return coord_1c;
+	}
+
+	public JLabel getCoord_2a() {
+		return coord_2a;
+	}
+
+	public JLabel getCoord_2b() {
+		return coord_2b;
+	}
+
+	public JLabel getCoord_2c() {
+		return coord_2c;
+	}
+
+	public JLabel getCoord_3a() {
+		return coord_3a;
+	}
+
+	public JLabel getCoord_3b() {
+		return coord_3b;
+	}
+
+	public JLabel getCoord_3c() {
+		return coord_3c;
+	}
+
+	public PanelResultado getPanelResultado() {
+		return (PanelResultado) resultado;
+	}
+	
 }

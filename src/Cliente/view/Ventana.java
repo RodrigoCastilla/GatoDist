@@ -1,9 +1,14 @@
 package Cliente.view;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import Cliente.controller.componentes.ComponentePanelPrincipal;
 
 @SuppressWarnings("serial")
 public class Ventana extends JFrame {
+	
+	private JPanel panel;
 	
 	public Ventana() {
 		initComponents();
@@ -16,7 +21,14 @@ public class Ventana extends JFrame {
 		setResizable(false);
 		setLayout(null);
 		setVisible(true);
-		setContentPane(new PanelPrincipal());
+		
+		this.panel = new ComponentePanelPrincipal().getPanelPrincipal();
+		setContentPane(this.panel);
+		repaint();
+	}
+	
+	public PanelPrincipal getPanelPrincipal() {
+		return (PanelPrincipal) this.panel;
 	}
 	
 	public static void main(String[] args) {

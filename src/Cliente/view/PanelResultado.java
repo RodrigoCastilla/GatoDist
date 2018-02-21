@@ -20,7 +20,7 @@ public class PanelResultado extends JPanel {
 	private void initComponents() {
 		setSize(400, 300);
 		setLayout(null);
-		setVisible(true);
+		setVisible(false);
 		
 		texto1 = new JLabel();
 		texto1.setBackground(Color.CYAN);
@@ -50,4 +50,17 @@ public class PanelResultado extends JPanel {
 		cerrar.setBounds(200, 150, 95, 50);
 		add(cerrar);
 	}
+
+	public JLabel getGanador() {
+		return ganador;
+	}
+
+	public JButton getReiniciar() {
+		return reiniciar;
+	}
+
+	public JButton getCerrar() {
+		return cerrar;
+	}
+	
 }
