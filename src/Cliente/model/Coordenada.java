@@ -1,9 +1,6 @@
 package Cliente.model;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-public class Coordenada extends MouseAdapter {
+public class Coordenada {
 
 	private int fila;
 	private char columna;
@@ -13,10 +10,12 @@ public class Coordenada extends MouseAdapter {
 		this.columna = columna;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		super.mouseClicked(e);
-		
+	public int getFila() {
+		return fila;
+	}
+
+	public char getColumna() {
+		return columna;
 	}
 	
 }
