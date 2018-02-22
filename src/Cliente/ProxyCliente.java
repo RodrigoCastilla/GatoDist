@@ -26,11 +26,8 @@ public class ProxyCliente {
     }
     
     
-    /*
-    *Método que consulta los movimientos del tablero, registrados hasta el momento.
-    *La cadena, se recibe de la siguiente manera: fila,columna,JUGADOR
-    *En caso de que no  haya sido jugada aún una casilla, se devolverá VACIO en lugar de JUGADOR1 o JUGADOR2
-    */
+    //Método Genérido para el paso de mensajes con una respuesta simple esperada
+    // Ejemplo: Si cliente envía "SOLICITUD" el servidor responderá "JUGADOR1" o "JUGADOR2" según sea el caso.
     public String mandarMensajeAlServidor(String mensaje) throws IOException, InterruptedException{
                 String mensajeRecibido = "";
                 String sentence = "";
@@ -84,6 +81,11 @@ public class ProxyCliente {
         return estadoMovimiento;
     }
     
+     /*
+    *Método que consulta los movimientos del tablero, registrados hasta el momento.
+    *La cadena, se recibe de la siguiente manera: fila,columna,JUGADOR
+    *En caso de que no  haya sido jugada aún una casilla, se devolverá VACIO en lugar de JUGADOR1 o JUGADOR2
+    */
     public ArrayList<String> obtenerDatosTablero() throws IOException, InterruptedException{
                 ArrayList<String> movimientosJuego= new ArrayList<String> ();
                 int cantidadFilasJuego = 3;
