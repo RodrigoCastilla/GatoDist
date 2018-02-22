@@ -11,7 +11,6 @@ import Cliente.model.Coordenada;
 import Cliente.view.Ventana;
 
 public class EventosCoordenadas extends MouseAdapter {
-
 	
 	private static final String X_SIMBOLO = "X", O_SIMBOLO = "O";
 	private Coordenada coord;
@@ -33,10 +32,8 @@ public class EventosCoordenadas extends MouseAdapter {
 			conexion.enviarDatos(datos);
 			conexion.cerrarConexion();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		verificarIcono();

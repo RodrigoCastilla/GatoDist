@@ -22,10 +22,13 @@ public class Main {
 	private static String solicitarJugador() throws IOException, InterruptedException {
 		Conexion conexion = new Conexion();
 		conexion.iniciarConexion();
+		
 		conexion.enviarDatos(Ventana.SOLICITUD);
 		String jugador = conexion.recibirDatos();
+		
 		conexion.enviarDatos(NUMERO_RANDOM);
 		Ventana.ICONO_XO = conexion.recibirDatos();
+		
 		conexion.cerrarConexion();
 		return jugador;
 	}
