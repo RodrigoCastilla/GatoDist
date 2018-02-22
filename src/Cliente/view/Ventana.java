@@ -8,11 +8,14 @@ import Cliente.controller.componentes.ComponentePanelPrincipal;
 @SuppressWarnings("serial")
 public class Ventana extends JFrame {
 	
+	public static final String SOLICITUD = "SOLICITUD";
 	public static String IP = "";
 	
 	private JPanel panel;
+	private String numJugador;
 	
-	public Ventana() {
+	public Ventana(String numJugador) {
+		this.numJugador = numJugador;
 		initComponents();
 	}
     
@@ -24,21 +27,12 @@ public class Ventana extends JFrame {
 		setLayout(null);
 		setVisible(true);
 		
-		this.panel = new ComponentePanelPrincipal().getPanelPrincipal();
+		this.panel = new ComponentePanelPrincipal(this.numJugador).getPanelPrincipal();
 		setContentPane(this.panel);
 		repaint();
 	}
 	
 	public PanelPrincipal getPanelPrincipal() {
 		return (PanelPrincipal) this.panel;
-	}
-	
-	public static void main(String[] args) throws Exception {
-		if(args.length == 1) {
-			IP = args[0];
-			new Ventana();
-		} else {
-			throw new Exception("No cumple el formato del parametro: java Ventana <IP-Cliente>");
-		}
 	}
 }

@@ -7,8 +7,8 @@ public class ComponentePanelPrincipal {
 
 private PanelPrincipal panelPrincipal;
 	
-	public ComponentePanelPrincipal() {
-		this.panelPrincipal = new PanelPrincipal();
+	public ComponentePanelPrincipal(String jugador) {
+		this.panelPrincipal = new PanelPrincipal(jugador);
 		new EventosPanelPrincipal(panelPrincipal);
 	}
 

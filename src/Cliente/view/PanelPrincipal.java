@@ -17,8 +17,10 @@ public class PanelPrincipal extends JPanel {
 	
 	private JLabel background, turno_text, turno_jugador, coord_1a, coord_1b, coord_1c, coord_2a, coord_2b, coord_2c, coord_3a, coord_3b, coord_3c;
 	private JPanel resultado;
+	private String jugador;
 	
-	public PanelPrincipal() {
+	public PanelPrincipal(String jugador) {
+		this.jugador = jugador;
 		setBackground(Color.WHITE);
 		setSize(500, 600);
 		setLayout(null);
@@ -80,7 +82,7 @@ public class PanelPrincipal extends JPanel {
 		turno_text.setHorizontalAlignment(JLabel.CENTER);
 		add(turno_text);
 		
-		turno_jugador = new JLabel("");
+		turno_jugador = new JLabel(this.jugador);
 		turno_jugador.setFont(new Font("Verdana", Font.BOLD, 20));
 		turno_jugador.setBounds(170, 520, 200, 50);
 		turno_jugador.setHorizontalAlignment(JLabel.CENTER);
