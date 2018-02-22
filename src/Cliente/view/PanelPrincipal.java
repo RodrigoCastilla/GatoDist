@@ -33,12 +33,12 @@ public class PanelPrincipal extends JPanel {
 		background.setBounds(0, 0, 500, 500);
 		ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/Cliente/images/board.png"));
 		Icon backgroundIcono = new ImageIcon(backgroundImage.getImage().getScaledInstance(background.getWidth(), background.getHeight(), Image.SCALE_DEFAULT));
+		background.setIcon(backgroundIcono);
+		add(background);
 		
 		resultado = new ComponentePanelResultado().getPanelResultado();
 		resultado.setLocation(50, 100);
 		add(resultado);
-		background.setIcon(backgroundIcono);
-		add(background);
 		
 		coord_1a = new JLabel();
 		coord_1a.setBounds(10, 11, 146, 146);

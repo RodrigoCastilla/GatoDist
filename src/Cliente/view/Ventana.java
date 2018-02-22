@@ -9,7 +9,7 @@ import Cliente.controller.componentes.ComponentePanelPrincipal;
 public class Ventana extends JFrame {
 	
 	public static final String SOLICITUD = "SOLICITUD";
-	public static String IP = "";
+	public static String IP = "", ICONO_XO = "";
 	
 	private JPanel panel;
 	private String numJugador;
