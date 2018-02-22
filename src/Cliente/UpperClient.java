@@ -26,10 +26,11 @@ public class UpperClient {
                 s = new Socket("localhost", 9091);
          BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
                 DataOutputStream outToServer = new DataOutputStream(s.getOutputStream());
+                
                 System.out.println("Acción a realizar: ");
-                BufferedReader inFromServer =
-                new BufferedReader(new InputStreamReader(s.getInputStream()));
-                sentence = inFromUser.readLine();
+                BufferedReader inFromServer = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                //sentence = inFromUser.readLine();
+                sentence = "CLOSECXN";
                 outToServer.writeBytes(sentence + '\n');
                 cadenaRecuperada = inFromServer.readLine();
                 System.out.println("From server: "+ cadenaRecuperada);
