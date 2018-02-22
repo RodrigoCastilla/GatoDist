@@ -1,0 +1,28 @@
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+nbdist/
+dist/
+.nb-gradle/
+nbactions.xml
+
+### Eclipse ###
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
