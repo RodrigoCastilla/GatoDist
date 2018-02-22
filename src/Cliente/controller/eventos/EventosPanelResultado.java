@@ -21,7 +21,7 @@ public class EventosPanelResultado implements ActionListener {
 		String comando = e.getActionCommand();
 		switch (comando) {
 		case REINICIAR:
-			
+			reiniciar();
 			break;
 		case CERRAR:
 			System.exit(0);
@@ -35,5 +35,9 @@ public class EventosPanelResultado implements ActionListener {
 		
 		this.panelResultado.getCerrar().addActionListener(this);
 		this.panelResultado.getCerrar().setActionCommand(CERRAR);
+	}
+	
+	private void reiniciar() {
+		
 	}
 }
