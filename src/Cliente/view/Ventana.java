@@ -8,6 +8,8 @@ import Cliente.controller.componentes.ComponentePanelPrincipal;
 @SuppressWarnings("serial")
 public class Ventana extends JFrame {
 	
+	public static String IP = "";
+	
 	private JPanel panel;
 	
 	public Ventana() {
@@ -31,7 +33,12 @@ public class Ventana extends JFrame {
 		return (PanelPrincipal) this.panel;
 	}
 	
-	public static void main(String[] args) {
-		new Ventana();
+	public static void main(String[] args) throws Exception {
+		if(args.length == 1) {
+			IP = args[0];
+			new Ventana();
+		} else {
+			throw new Exception("No cumple el formato del parametro: java Ventana <IP-Cliente>");
+		}
 	}
 }

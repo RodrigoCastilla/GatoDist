@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import Cliente.controller.conexion.Conexion;
 import Cliente.model.Coordenada;
+import Cliente.view.Ventana;
 
 public class EventosCoordenadas extends MouseAdapter {
 
@@ -20,8 +21,11 @@ public class EventosCoordenadas extends MouseAdapter {
 		super.mouseClicked(e);
 		Conexion conexion = new Conexion();
 		try {
+			String datos = Ventana.IP + "," + coord.getFila() + "," + coord.getColumna();
+			System.out.println(datos);
+			
 			conexion.iniciarConexion();
-			conexion.enviarDatos("JUGADOR" + "," + coord.getFila() + "," + coord.getColumna());
+			conexion.enviarDatos(datos);
 			conexion.cerrarConexion();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
