@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class ProxyCliente {
     private final String HOST = "localhost";
     private final int PUERTO = 9091;
-    private Socket s;
+ 
     
     public ProxyCliente(){
     }
@@ -34,7 +34,7 @@ public class ProxyCliente {
     public String mandarMensajeAlServidor(String mensaje) throws IOException, InterruptedException{
                 String mensajeRecibido = "";
                 String sentence = "";
-                s = new Socket(HOST, PUERTO);
+                Socket s = new Socket(HOST, PUERTO);
                 BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
                 DataOutputStream outToServer = new DataOutputStream(s.getOutputStream());
                 
@@ -53,7 +53,7 @@ public class ProxyCliente {
                 } else{
                     System.out.println("Recibido: ...");
                 }
-                Thread.sleep(75);
+                Thread.sleep(50);
                 s.close();
         return mensajeRecibido;
     }
@@ -62,9 +62,9 @@ public class ProxyCliente {
     //Método que envía un movimiento al servidor el cual, después de procesar la solicitud, regresa una cadena que indica si fue exitoso el envío o no llegó;
     public String realizarMovimiento(int fila, int columna, String nombreJugador) throws IOException, InterruptedException{
         String estadoMovimiento = "NO_RECIBIDO";
-        String mensaje = fila + "," + columna + "," + (nombreJugador.toUpperCase());
+        String mensaje = "REGMOV," + fila + "," + columna + "," + (nombreJugador.toUpperCase());
         String mensajeRecibido = "";
-                s = new Socket(HOST, PUERTO);
+                Socket s  = new Socket(HOST, PUERTO);
                 BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
                 DataOutputStream outToServer = new DataOutputStream(s.getOutputStream());
                 
@@ -78,7 +78,7 @@ public class ProxyCliente {
                     System.out.println("Recibido: "+ mensajeRecibido);
                     estadoMovimiento = "RECIBIDO";
                 }
-                Thread.sleep(75);
+                Thread.sleep(25);
                 s.close();
         
         return estadoMovimiento;
@@ -91,8 +91,8 @@ public class ProxyCliente {
                 for(int i=0; i<cantidadFilasJuego; i++){
                     for (int j=0; j< cantidadColumnasJuego; j++){
                         String mensajeRecibido = "";
-                        String mensaje = (i+1)+ ","+(j+1)+ ",SOL";
-                        s = new Socket(HOST, PUERTO);
+                        String mensaje = (i+1)+ ","+(j+1)+ ",SOLMOVS";
+                        Socket s  = new Socket(HOST, PUERTO);
                         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
                         DataOutputStream outToServer = new DataOutputStream(s.getOutputStream());
 
@@ -104,7 +104,7 @@ public class ProxyCliente {
                         movimientosJuego.add(mensajeRecibido);
                         System.out.println("Recibido: "+ mensajeRecibido);
                         
-                        Thread.sleep(75);
+                        Thread.sleep(10);
                         s.close();
                     }
 

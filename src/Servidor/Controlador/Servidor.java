@@ -20,17 +20,32 @@ import java.util.ArrayList;
  *
  * @author ARMC3PO
  */
-public class Server {
-
+public class Servidor {
+    private ArrayList<Movimiento> movimientos = new ArrayList<Movimiento>();
+    public Servidor(){
+        Jugador jugador = new Jugador();
+        jugador.setNombreJugador("VACIO");
+        jugador.setSimboloJugador("[ - ]");
+        this.movimientos.add((new Movimiento(1, 1, jugador)));
+        this.movimientos.add((new Movimiento(1, 2, jugador)));
+        this.movimientos.add((new Movimiento(1, 3, jugador)));
+        this.movimientos.add((new Movimiento(2, 1, jugador)));
+        this.movimientos.add((new Movimiento(2, 2, jugador)));
+        this.movimientos.add((new Movimiento(2, 3, jugador)));
+        this.movimientos.add((new Movimiento(3, 1, jugador)));
+        this.movimientos.add((new Movimiento(3, 2, jugador)));
+        this.movimientos.add((new Movimiento(3, 3, jugador)));
+        System.out.println("Servidor Inicializado.");
+       
+    }
     
-    
-    public static void main(String[] args) throws IOException {
+    public void correrServidor() throws IOException{
         String clientSentence;
         String respuesta;
         int cantidadJugadores = 0;
         String jugadorQueEligePrimero ="";
         int valorAlAzarEntreUnoYCien = (int) (Math.random()*101 + 1);
-        ArrayList<Movimiento> movimientos = new ArrayList<Movimiento>();
+        
         ModeradorJuego moderador= new ModeradorJuego(movimientos);
         ArrayList<Jugador> jugadores = new ArrayList<Jugador> ();
         ServerSocket listener = new ServerSocket(9091);
@@ -52,11 +67,13 @@ public class Server {
                          String respuestaSolicitud="";
                          if(cantidadJugadores == 0){
                              jugadores.add(new Jugador("JUGADOR1"));
+                             jugadores.get(0).setSimboloJugador("X");
                              respuestaSolicitud = "JUGADOR1";
                               System.out.println("Registrado JUGADOR1");
                          cantidadJugadores++;
                          } else if (cantidadJugadores ==1){
                              jugadores.add(new Jugador("JUGADOR2"));
+                             jugadores.get(1).setSimboloJugador("O");
                              respuestaSolicitud = "JUGADOR2";
                              System.out.println("Registrado JUGADOR 2");
                              cantidadJugadores++;
@@ -94,16 +111,61 @@ public class Server {
                          String respuestaSolicitud="";
                          String symJug = "";
                          String[] partsClient = clientSentence.split(",");
-                         if(partsClient[1].compareTo("JUGADOR1") == 0){
+                         if(partsClient[1].toUpperCase().compareTo(jugadorQueEligePrimero) == 0){
+                            if(partsClient[1].compareTo("JUGADOR1") == 0){
                              symJug = partsClient[2];
                              jugadores.get(0).setSimboloJugador(symJug);
-                         }
-                         if(partsClient[1].compareTo("JUGADOR2") == 0){
-                             symJug = partsClient[2];
-                             jugadores.get(0).setSimboloJugador(symJug);
+                             respuestaSolicitud = "RIVAL_ELIGIENDO";
+                            }
+                            if(partsClient[1].compareTo("JUGADOR2") == 0){
+                                symJug = partsClient[2];
+                                jugadores.get(0).setSimboloJugador(symJug);
+                                respuestaSolicitud = "RIVAL_ELIGIENDO";
+                            } 
+                             
+                         } else{
+                             respuestaSolicitud = "RIVAL_ELIGIENDO";
                          }
                          
-                         
+                     }
+                     
+                     if((clientSentence.toUpperCase()).contains("SOLMOVS")){
+                             String respuestaSolicitud= "";
+                             String[] cadena = clientSentence.split(",");
+                             int filaSol = Integer.parseInt(cadena[0]);
+                             int columnaSol = Integer.parseInt(cadena[1]);
+                             int cont=0;
+                             for(int i=0; i<movimientos.size(); i++){
+                                    int fila = movimientos.get(i).getFila();
+                                     int columna = movimientos.get(i).getColumna();
+                                     String receptor = movimientos.get(i).getJugador().getSimboloJugador();
+                                     if((fila == filaSol) && (columna == columnaSol)){
+                                         respuestaSolicitud = fila +"," + columna + "," + receptor;
+                                         System.out.println(respuestaSolicitud);
+                                     }
+                             }
+                             respuesta = respuestaSolicitud;
+                             
+                     }
+                     if((clientSentence.toUpperCase()).contains("REGMOV")){
+                             String respuestaSolicitud= "NO_RECIBIDO";
+                             String[] cadena = clientSentence.split(",");
+                             int filaSol = Integer.parseInt(cadena[1]);
+                             int columnaSol = Integer.parseInt(cadena[2]);
+                             String jugador = cadena[3].toUpperCase();
+                             for(int i=0; i<movimientos.size(); i++){
+                                int fila = movimientos.get(i).getFila();
+                                int columna = movimientos.get(i).getColumna();
+                                if((fila == filaSol) && (columna == columnaSol)){
+                                    if(jugador.compareTo("JUGADOR1")==0)
+                                        movimientos.get(i).setJugador(jugadores.get(0));
+                                    else if (jugador.compareTo("JUGADOR2")==0)
+                                        movimientos.get(i).setJugador(jugadores.get(1));
+                                    
+                                    respuestaSolicitud = "RECIBIDO";
+                                }
+                             }
+                             respuesta = respuestaSolicitud;
                      }
                      
                      
@@ -124,5 +186,9 @@ public class Server {
         finally {
             listener.close();
         }
+    }
+    public static void main(String[] args) throws IOException {
+        Servidor serv = new Servidor();
+        serv.correrServidor();
     }
 }

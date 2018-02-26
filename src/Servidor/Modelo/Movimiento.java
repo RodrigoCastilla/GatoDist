@@ -16,6 +16,7 @@ public class Movimiento {
     public Movimiento(int fila, int columna, Jugador jugador){
         this.fila = fila;
         this.columna = columna;
+        this.jugador = jugador;
     }
 
     public Movimiento() {

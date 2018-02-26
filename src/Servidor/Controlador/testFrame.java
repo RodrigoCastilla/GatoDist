@@ -87,12 +87,12 @@ public class testFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             ProxyCliente proxyC = new ProxyCliente();
-            jLabel1.setText(proxyC.mandarMensajeAlServidor("SOLICITUD"));
-            //ArrayList<String> movs = proxyC.obtenerDatosTablero();
-            //String text = "";
-            /*for(int i=0; i<movs.size(); i++)
-                text+=movs.get(i);
-            jTextArea1.setText(text);*/
+            //jLabel1.setText(proxyC.mandarMensajeAlServidor("SOLICITUD"));
+            ArrayList<String> movs = proxyC.obtenerDatosTablero();
+            String text = "";
+            for(int i=0; i<movs.size(); i++)
+                text+=movs.get(i) + "\n";
+            jTextArea1.setText(text);
         } catch (IOException ex) {
             Logger.getLogger(testFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
