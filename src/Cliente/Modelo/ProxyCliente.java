@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente;
+package Cliente.Modelo;
 
 import Servidor.Modelo.Movimiento;
 import java.io.BufferedReader;
@@ -104,7 +104,7 @@ public class ProxyCliente {
                         movimientosJuego.add(mensajeRecibido);
                         System.out.println("Recibido: "+ mensajeRecibido);
                         
-                        Thread.sleep(10);
+                        Thread.sleep(25);
                         s.close();
                     }
 

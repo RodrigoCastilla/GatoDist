@@ -1,6 +1,6 @@
 package Cliente.Vista;
 
-import Cliente.ProxyCliente;
+import Cliente.Modelo.ProxyCliente;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

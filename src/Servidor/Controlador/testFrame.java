@@ -5,7 +5,7 @@
  */
 package Servidor.Controlador;
 
-import Cliente.ProxyCliente;
+import Cliente.Modelo.ProxyCliente;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;

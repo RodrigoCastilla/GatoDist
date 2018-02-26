@@ -1,6 +1,6 @@
 package Cliente.Vista;
 
-import Cliente.ProxyCliente;
+import Cliente.Modelo.ProxyCliente;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -131,13 +131,6 @@ public class vistaGato extends javax.swing.JFrame {
         this.jugadorLBL = jugadorLBL;
     }
 
-    public JLabel getNumJugadorLBL() {
-        return numJugadorLBL;
-    }
-
-    public void setNumJugadorLBL(JLabel numJugadorLBL) {
-        this.numJugadorLBL = numJugadorLBL;
-    }
 
     public JPanel getPanelBarraEstados() {
         return panelBarraEstados;
@@ -179,6 +172,14 @@ public class vistaGato extends javax.swing.JFrame {
         this.simboloLBL = simboloLBL;
     }
 
+    public JPanel getPanelGanador() {
+        return panelGanador;
+    }
+
+    public void setPanelGanador(JPanel panelGanador) {
+        this.panelGanador = panelGanador;
+    }
+
     
     
     
@@ -206,13 +207,13 @@ public class vistaGato extends javax.swing.JFrame {
         C2Btn = new javax.swing.JButton();
         C3Btn = new javax.swing.JButton();
         panelBarraEstados = new javax.swing.JPanel();
-        numJugadorLBL = new javax.swing.JLabel();
         jugadorLBL = new javax.swing.JLabel();
         simboloLBL = new javax.swing.JLabel();
         estadoLBL = new javax.swing.JLabel();
         simbJugadorLBL = new javax.swing.JLabel();
         estadoJugadorLBL = new javax.swing.JLabel();
-        actualizar = new javax.swing.JButton();
+        panelGanador = new javax.swing.JPanel();
+        ganadorTxT = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -258,6 +259,7 @@ public class vistaGato extends javax.swing.JFrame {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
+        A1Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         A1Btn.setText(" ");
         A1Btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,14 +267,19 @@ public class vistaGato extends javax.swing.JFrame {
             }
         });
 
+        A2Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         A2Btn.setText(" ");
 
+        A3Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         A3Btn.setText(" ");
 
+        B3Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         B3Btn.setText(" ");
 
+        B2Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         B2Btn.setText(" ");
 
+        B1Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         B1Btn.setText(" ");
         B1Btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,6 +287,7 @@ public class vistaGato extends javax.swing.JFrame {
             }
         });
 
+        C1Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         C1Btn.setText(" ");
         C1Btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,8 +295,10 @@ public class vistaGato extends javax.swing.JFrame {
             }
         });
 
+        C2Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         C2Btn.setText(" ");
 
+        C3Btn.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         C3Btn.setText(" ");
 
         javax.swing.GroupLayout panelJuegoLayout = new javax.swing.GroupLayout(panelJuego);
@@ -334,12 +344,8 @@ public class vistaGato extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        numJugadorLBL.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        numJugadorLBL.setForeground(new java.awt.Color(102, 102, 0));
-        numJugadorLBL.setText("1");
-
         jugadorLBL.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jugadorLBL.setText("Juagador: ");
+        jugadorLBL.setText("Juagador: ...");
 
         simboloLBL.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         simboloLBL.setText("Símbolo:");
@@ -361,10 +367,8 @@ public class vistaGato extends javax.swing.JFrame {
             panelBarraEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBarraEstadosLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jugadorLBL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(numJugadorLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jugadorLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(simboloLBL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(simbJugadorLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,19 +382,32 @@ public class vistaGato extends javax.swing.JFrame {
             panelBarraEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBarraEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jugadorLBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(numJugadorLBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(simboloLBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(simbJugadorLBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(estadoLBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(estadoJugadorLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        actualizar.setText("jButton1");
-        actualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarActionPerformed(evt);
-            }
-        });
+        ganadorTxT.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        ganadorTxT.setForeground(new java.awt.Color(51, 204, 0));
+        ganadorTxT.setText("¡Felicidades! Has ganado.");
+
+        javax.swing.GroupLayout panelGanadorLayout = new javax.swing.GroupLayout(panelGanador);
+        panelGanador.setLayout(panelGanadorLayout);
+        panelGanadorLayout.setHorizontalGroup(
+            panelGanadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGanadorLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(ganadorTxT)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelGanadorLayout.setVerticalGroup(
+            panelGanadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGanadorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ganadorTxT, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -410,9 +427,9 @@ public class vistaGato extends javax.swing.JFrame {
                 .addGap(99, 99, 99)
                 .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(actualizar)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelGanador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -426,8 +443,9 @@ public class vistaGato extends javax.swing.JFrame {
                     .addComponent(panelTurnoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(actualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelGanador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -444,11 +462,6 @@ public class vistaGato extends javax.swing.JFrame {
     private void C1BtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1BtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_C1BtnActionPerformed
-
-    private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-
-        
-    }//GEN-LAST:event_actualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,14 +515,14 @@ public class vistaGato extends javax.swing.JFrame {
     private javax.swing.JButton C2Btn;
     private javax.swing.JButton C3Btn;
     private javax.swing.JPanel PanelTurnoContrincante;
-    private javax.swing.JButton actualizar;
     private javax.swing.JLabel estadoJugadorLBL;
     private javax.swing.JLabel estadoLBL;
+    private javax.swing.JLabel ganadorTxT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jugadorLBL;
-    private javax.swing.JLabel numJugadorLBL;
     private javax.swing.JPanel panelBarraEstados;
+    private javax.swing.JPanel panelGanador;
     private javax.swing.JPanel panelJuego;
     private javax.swing.JPanel panelTurnoLocal;
     private javax.swing.JLabel simbJugadorLBL;

@@ -46,9 +46,11 @@ public class Servidor {
         String jugadorQueEligePrimero ="";
         int valorAlAzarEntreUnoYCien = (int) (Math.random()*101 + 1);
         
-        ModeradorJuego moderador= new ModeradorJuego(movimientos);
+        ModeradorJuego moderador= new ModeradorJuego(this.movimientos);
         ArrayList<Jugador> jugadores = new ArrayList<Jugador> ();
         ServerSocket listener = new ServerSocket(9091);
+        
+        String jugadorEnTurno = "JUGADOR1";
         try {
             while (true) {
                 Socket socket = listener.accept();
@@ -141,7 +143,7 @@ public class Servidor {
                                      String receptor = movimientos.get(i).getJugador().getSimboloJugador();
                                      if((fila == filaSol) && (columna == columnaSol)){
                                          respuestaSolicitud = fila +"," + columna + "," + receptor;
-                                         System.out.println(respuestaSolicitud);
+                                         //System.out.println(respuestaSolicitud);
                                      }
                              }
                              respuesta = respuestaSolicitud;
@@ -153,21 +155,34 @@ public class Servidor {
                              int filaSol = Integer.parseInt(cadena[1]);
                              int columnaSol = Integer.parseInt(cadena[2]);
                              String jugador = cadena[3].toUpperCase();
-                             for(int i=0; i<movimientos.size(); i++){
-                                int fila = movimientos.get(i).getFila();
-                                int columna = movimientos.get(i).getColumna();
-                                if((fila == filaSol) && (columna == columnaSol)){
-                                    if(jugador.compareTo("JUGADOR1")==0)
-                                        movimientos.get(i).setJugador(jugadores.get(0));
-                                    else if (jugador.compareTo("JUGADOR2")==0)
-                                        movimientos.get(i).setJugador(jugadores.get(1));
-                                    
-                                    respuestaSolicitud = "RECIBIDO";
+                             if(jugadorEnTurno.compareTo(jugador) ==0){
+                                for(int i=0; i<movimientos.size(); i++){
+                                    int fila = movimientos.get(i).getFila();
+                                    int columna = movimientos.get(i).getColumna();
+                                    if((fila == filaSol) && (columna == columnaSol)){
+                                        if(jugador.compareTo("JUGADOR1")==0){
+                                            movimientos.get(i).setJugador(jugadores.get(0));
+                                            
+                                            jugadorEnTurno = "JUGADOR2";
+                                        } else if (jugador.compareTo("JUGADOR2")==0){
+                                            movimientos.get(i).setJugador(jugadores.get(1));
+                                            jugadorEnTurno= "JUGADOR1";
+                                        }
+                                            
+                                        respuestaSolicitud = "RECIBIDO";
+                                    }
                                 }
+                             } else{
+                                 respuestaSolicitud = "TURNO_ERRONEO";
                              }
+                             
                              respuesta = respuestaSolicitud;
                      }
                      
+                     if(((clientSentence.toUpperCase()).compareTo("GANADOR")) == 0){
+                         String respuestaSolicitud= moderador.verificarGanador();
+                         respuesta = respuestaSolicitud;
+                     }
                      
                      
                      if(((clientSentence.toUpperCase()).compareTo("CLOSECXN")) == 0){
@@ -186,9 +201,5 @@ public class Servidor {
         finally {
             listener.close();
         }
-    }
-    public static void main(String[] args) throws IOException {
-        Servidor serv = new Servidor();
-        serv.correrServidor();
     }
 }

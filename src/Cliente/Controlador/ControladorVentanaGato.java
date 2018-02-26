@@ -1,5 +1,7 @@
+package Cliente.Controlador;
 
-import Cliente.ProxyCliente;
+
+import Cliente.Modelo.ProxyCliente;
 import Cliente.Vista.vistaGato;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +26,7 @@ public class ControladorVentanaGato implements ActionListener{
     private ProxyCliente proxyCliente;
     private String nombreJugador;
     private ArrayList<String> movimientosTablero;
+    private boolean finDelJuego;
     
     public ControladorVentanaGato() throws InterruptedException, IOException{
        this.ventanaGato = new vistaGato();
@@ -40,8 +43,9 @@ public class ControladorVentanaGato implements ActionListener{
        
        nombreJugador = proxyCliente.mandarMensajeAlServidor("SOLICITUD");
        movimientosTablero = proxyCliente.obtenerDatosTablero();
-       
-       ventanaGato.setVisible(true);
+       this.ventanaGato.getPanelGanador().setVisible(false);
+       this.ventanaGato.getJugadorLBL().setText(nombreJugador);
+       this.ventanaGato.setVisible(true);
        
     }
 
@@ -87,30 +91,46 @@ public class ControladorVentanaGato implements ActionListener{
     }
     
     public void actualizarVistaTablero() throws InterruptedException, IOException{
-        //this.ventanaGato.getPanelJuego().setVisible(false);
-        movimientosTablero = proxyCliente.obtenerDatosTablero();
-        String[] a1= (movimientosTablero.get(0)).split(",");
-        this.ventanaGato.getA1Btn().setText(a1[2]);
-        String[] a2= (movimientosTablero.get(1)).split(",");
-        this.ventanaGato.getA2Btn().setText(a2[2]);
-        String[] a3= (movimientosTablero.get(2)).split(",");
-        this.ventanaGato.getA3Btn().setText(a3[2]);
-        String[] b1= (movimientosTablero.get(3)).split(",");
-        this.ventanaGato.getB1Btn().setText(b1[2]);
-        String[] b2= (movimientosTablero.get(4)).split(",");
-        this.ventanaGato.getB2Btn().setText(b2[2]);
-        String[] b3= (movimientosTablero.get(5)).split(",");
-        this.ventanaGato.getB3Btn().setText(b3[2]);
-        String[] c1= (movimientosTablero.get(6)).split(",");
-        this.ventanaGato.getC1Btn().setText(c1[2]);
-        String[] c2= (movimientosTablero.get(7)).split(",");
-        this.ventanaGato.getC2Btn().setText(c2[2]);
-        String[] c3= (movimientosTablero.get(8)).split(",");
-        this.ventanaGato.getC3Btn().setText(c3[2]);
+        if(finDelJuego == false ){
+            if(finDelJuego() == true){
+                this.ventanaGato.getA1Btn().setEnabled(false);
+                this.ventanaGato.getA2Btn().setEnabled(false);
+                this.ventanaGato.getA3Btn().setEnabled(false);
+                this.ventanaGato.getB1Btn().setEnabled(false);
+                this.ventanaGato.getB2Btn().setEnabled(false);
+                this.ventanaGato.getB3Btn().setEnabled(false);
+                this.ventanaGato.getC1Btn().setEnabled(false);
+                this.ventanaGato.getC2Btn().setEnabled(false);
+                this.ventanaGato.getC3Btn().setEnabled(false);
+                finDelJuego = true;
+                //proxyCliente.mandarMensajeAlServidor("CLOSECXN");
+            }
+                movimientosTablero = proxyCliente.obtenerDatosTablero();
+                String[] a1= (movimientosTablero.get(0)).split(",");
+                this.ventanaGato.getA1Btn().setText(a1[2]);
+                String[] a2= (movimientosTablero.get(1)).split(",");
+                this.ventanaGato.getA2Btn().setText(a2[2]);
+                String[] a3= (movimientosTablero.get(2)).split(",");
+                this.ventanaGato.getA3Btn().setText(a3[2]);
+                String[] b1= (movimientosTablero.get(3)).split(",");
+                this.ventanaGato.getB1Btn().setText(b1[2]);
+                String[] b2= (movimientosTablero.get(4)).split(",");
+                this.ventanaGato.getB2Btn().setText(b2[2]);
+                String[] b3= (movimientosTablero.get(5)).split(",");
+                this.ventanaGato.getB3Btn().setText(b3[2]);
+                String[] c1= (movimientosTablero.get(6)).split(",");
+                this.ventanaGato.getC1Btn().setText(c1[2]);
+                String[] c2= (movimientosTablero.get(7)).split(",");
+                this.ventanaGato.getC2Btn().setText(c2[2]);
+                String[] c3= (movimientosTablero.get(8)).split(",");
+                this.ventanaGato.getC3Btn().setText(c3[2]);    
+                actualizarUsoBotones();
+                this.ventanaGato.getPanelJuego().updateUI();
+                //this.ventanaGato.getPanelJuego().setVisible(true);     
+        } 
+         
+
         
-        actualizarUsoBotones();
-        this.ventanaGato.getPanelJuego().updateUI();
-        //this.ventanaGato.getPanelJuego().setVisible(true);
     }
     
     private void actualizarUsoBotones(){
@@ -150,4 +170,25 @@ public class ControladorVentanaGato implements ActionListener{
         if(c3[2].compareTo("[ - ]") != 0)
             this.ventanaGato.getC3Btn().setEnabled(false);
     }
+    
+    
+    public boolean finDelJuego() throws IOException, InterruptedException{
+        boolean juegoTerminado = false;
+        String respuestaVerificacionGanador = proxyCliente.mandarMensajeAlServidor("GANADOR");
+        System.out.println("Ganador: " + respuestaVerificacionGanador);
+        if(respuestaVerificacionGanador.compareTo("NADIE")!=0){
+           if(respuestaVerificacionGanador.compareTo(nombreJugador) == 0){
+               JOptionPane.showMessageDialog(null, "¡GANASTE" + nombreJugador + "! :)");
+               this.ventanaGato.getPanelGanador();
+           } else{
+               JOptionPane.showMessageDialog(null, "¡Perdiste " + nombreJugador + "! :(");
+           }
+               
+            juegoTerminado = true;
+
+        }
+        
+        return juegoTerminado;
+    }
+    
 }
