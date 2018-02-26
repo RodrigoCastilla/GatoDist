@@ -90,25 +90,56 @@ public class Servidor {
                          String respuestaSolicitud="";
                          int numJug1 = 0;
                          int numJug2 = 0;
+                         
                          String[] partsClient = clientSentence.split(",");
-                         if(partsClient[1].compareTo("JUGADOR1") == 0){
-                             numJug1 = Integer.parseInt(partsClient[2]);
+                         if(partsClient.length>2){
+                            if(partsClient[1].compareTo("JUGADOR1") == 0){
+                                numJug1 = Integer.parseInt(partsClient[2]);
                              
-                         }
-                         if(partsClient[1].compareTo("JUGADOR2") == 0){
-                             numJug2 = Integer.parseInt(partsClient[2]);
-                         }
-                         int diferenciaJug1 = 0;
-                         int diferenciaJug2 = 0;
-                         diferenciaJug1 = Math.abs((valorAlAzarEntreUnoYCien - diferenciaJug1));
-                         diferenciaJug2 = Math.abs((valorAlAzarEntreUnoYCien - diferenciaJug2));
-                         if(diferenciaJug1 >= diferenciaJug2){
-                             jugadorQueEligePrimero = "JUGADOR1";
+                            }
+                            if(partsClient[1].compareTo("JUGADOR2") == 0){
+                                numJug2 = Integer.parseInt(partsClient[2]);
+                            }
+                         
+                         } else if (partsClient.length ==  2) {
+                             int diferenciaJug1 = 0;
+                             int diferenciaJug2 = 0;
+                             if(numJug1 != 0 && numJug2 != 0){
+                             diferenciaJug1 = Math.abs((valorAlAzarEntreUnoYCien - diferenciaJug1));
+                            diferenciaJug2 = Math.abs((valorAlAzarEntreUnoYCien - diferenciaJug2));
+                            if(diferenciaJug1 >= diferenciaJug2){
+                                respuestaSolicitud = "JUGADOR1";
+                                jugadorQueEligePrimero = "JUGADOR1";
+                            } else{
+                                respuestaSolicitud = "JUGADOR2";
+                                jugadorQueEligePrimero = "JUGADOR2";
+                            }
                          } else{
-                             jugadorQueEligePrimero = "JUGADOR2";
+                             respuestaSolicitud = "LEYENDO_NUMEROS";
+                         }
                          }
                          
+                            
+                         
+                         respuesta = respuestaSolicitud;
                      }
+                     
+                     if(((clientSentence.toUpperCase()).compareTo("CANT_JUGADORES")) == 0){
+                         String respuestaSolicitud= String.valueOf(cantidadJugadores);
+                         respuesta = respuestaSolicitud;
+                     }
+                     
+                     
+                     if(((clientSentence.toUpperCase()).compareTo("SIMBS_STATE")) == 0){
+                         String respuestaSolicitud= "";
+                         if(jugadores.get(0).getSimboloJugador().compareTo(" ") == 0 || jugadores.get(1).getSimboloJugador().compareTo(" ") ==0){
+                             respuestaSolicitud = "LEYENDO_SIMBOLOS";
+                         } else {
+                             respuestaSolicitud = "SIMBOLOS_LEIDOS";
+                         }
+                         respuesta = respuestaSolicitud;
+                     }
+                     
                      if((clientSentence.toUpperCase()).contains("REGSYM")){
                          String respuestaSolicitud="";
                          String symJug = "";
@@ -117,17 +148,18 @@ public class Servidor {
                             if(partsClient[1].compareTo("JUGADOR1") == 0){
                              symJug = partsClient[2];
                              jugadores.get(0).setSimboloJugador(symJug);
-                             respuestaSolicitud = "RIVAL_ELIGIENDO";
+                             respuestaSolicitud = "JUGADOR1";
                             }
                             if(partsClient[1].compareTo("JUGADOR2") == 0){
                                 symJug = partsClient[2];
                                 jugadores.get(0).setSimboloJugador(symJug);
-                                respuestaSolicitud = "RIVAL_ELIGIENDO";
+                                respuestaSolicitud = "JUGADOR2";
                             } 
                              
                          } else{
                              respuestaSolicitud = "RIVAL_ELIGIENDO";
                          }
+                         respuesta = respuestaSolicitud;
                          
                      }
                      

@@ -36,13 +36,6 @@ public class vistaSeleccion extends javax.swing.JFrame {
         this.PanelSeleccionSimbolo = PanelSeleccionSimbolo;
     }
 
-    public JButton getActualizarBTN() {
-        return actualizarBTN;
-    }
-
-    public void setActualizarBTN(JButton actualizarBTN) {
-        this.actualizarBTN = actualizarBTN;
-    }
 
     public JButton getEnviarNumeroBTN() {
         return enviarNumeroBTN;
@@ -128,7 +121,6 @@ public class vistaSeleccion extends javax.swing.JFrame {
         textoSimbolo = new javax.swing.JTextField();
         enviarSimboloBTN = new javax.swing.JButton();
         estadoContrincanteLBL = new javax.swing.JLabel();
-        actualizarBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,21 +174,12 @@ public class vistaSeleccion extends javax.swing.JFrame {
         estadoContrincanteLBL.setForeground(new java.awt.Color(166, 92, 27));
         estadoContrincanteLBL.setText("(Tu contrincante aún no slecciona nada)");
 
-        actualizarBTN.setText("Actualizar");
-        actualizarBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarBTNActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanelSeleccionSimboloLayout = new javax.swing.GroupLayout(PanelSeleccionSimbolo);
         PanelSeleccionSimbolo.setLayout(PanelSeleccionSimboloLayout);
         PanelSeleccionSimboloLayout.setHorizontalGroup(
             PanelSeleccionSimboloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelSeleccionSimboloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(actualizarBTN)
-                .addGap(137, 137, 137)
+                .addGap(238, 238, 238)
                 .addComponent(enviarSimboloBTN)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelSeleccionSimboloLayout.createSequentialGroup()
@@ -220,9 +203,7 @@ public class vistaSeleccion extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(textoSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelSeleccionSimboloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enviarSimboloBTN)
-                    .addComponent(actualizarBTN))
+                .addComponent(enviarSimboloBTN)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -249,10 +230,6 @@ public class vistaSeleccion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void actualizarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarBTNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_actualizarBTNActionPerformed
 
     private void enviarNumeroBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarNumeroBTNActionPerformed
         // TODO add your handling code here:
@@ -313,7 +290,6 @@ public class vistaSeleccion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelSeleccionSimbolo;
-    private javax.swing.JButton actualizarBTN;
     private javax.swing.JButton enviarNumeroBTN;
     private javax.swing.JButton enviarSimboloBTN;
     private javax.swing.JLabel estadoContrincanteLBL;

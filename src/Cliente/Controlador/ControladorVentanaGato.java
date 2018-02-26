@@ -40,8 +40,29 @@ public class ControladorVentanaGato implements ActionListener{
        this.ventanaGato.getC1Btn().addActionListener(this);
        this.ventanaGato.getC2Btn().addActionListener(this);
        this.ventanaGato.getC3Btn().addActionListener(this);
+       finDelJuego = false;
+       this.nombreJugador = proxyCliente.mandarMensajeAlServidor("SOLICITUD");
+       movimientosTablero = proxyCliente.obtenerDatosTablero();
+       this.ventanaGato.getPanelGanador().setVisible(false);
+       this.ventanaGato.getJugadorLBL().setText(nombreJugador);
+       this.ventanaGato.setVisible(true);
        
-       nombreJugador = proxyCliente.mandarMensajeAlServidor("SOLICITUD");
+    }
+    
+    public ControladorVentanaGato(String nombreDelJugador) throws InterruptedException, IOException{
+       this.ventanaGato = new vistaGato();
+       proxyCliente = new ProxyCliente();
+       this.ventanaGato.getA1Btn().addActionListener(this);
+       this.ventanaGato.getA2Btn().addActionListener(this);
+       this.ventanaGato.getA3Btn().addActionListener(this);
+       this.ventanaGato.getB1Btn().addActionListener(this);
+       this.ventanaGato.getB2Btn().addActionListener(this);
+       this.ventanaGato.getB3Btn().addActionListener(this);
+       this.ventanaGato.getC1Btn().addActionListener(this);
+       this.ventanaGato.getC2Btn().addActionListener(this);
+       this.ventanaGato.getC3Btn().addActionListener(this);
+       finDelJuego = false;
+       this.nombreJugador = nombreDelJugador;
        movimientosTablero = proxyCliente.obtenerDatosTablero();
        this.ventanaGato.getPanelGanador().setVisible(false);
        this.ventanaGato.getJugadorLBL().setText(nombreJugador);
@@ -70,6 +91,14 @@ public class ControladorVentanaGato implements ActionListener{
         }if (this.ventanaGato.getC3Btn() == e.getSource()){
             realizarMovimiento(3,3);
         }
+    }
+
+    public String getNombreJugador() {
+        return nombreJugador;
+    }
+
+    public void setNombreJugador(String nombreJugador) {
+        this.nombreJugador = nombreJugador;
     }
     
     private void realizarMovimiento(int fila, int columna) {

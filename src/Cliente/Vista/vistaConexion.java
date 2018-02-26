@@ -35,14 +35,6 @@ public class vistaConexion extends javax.swing.JFrame {
         this.jugadorLBL = jugadorLBL;
     }
 
-    public JLabel getNumJugadorLBL() {
-        return numJugadorLBL;
-    }
-
-    public void setNumJugadorLBL(JLabel numJugadorLBL) {
-        this.numJugadorLBL = numJugadorLBL;
-    }
-
     public JPanel getPanelBusquedaContrincante() {
         return panelBusquedaContrincante;
     }
@@ -92,7 +84,6 @@ public class vistaConexion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         playBTN = new javax.swing.JButton();
         jugadorLBL = new javax.swing.JLabel();
-        numJugadorLBL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,10 +153,6 @@ public class vistaConexion extends javax.swing.JFrame {
         jugadorLBL.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jugadorLBL.setText("Juagador: ");
 
-        numJugadorLBL.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        numJugadorLBL.setForeground(new java.awt.Color(102, 102, 0));
-        numJugadorLBL.setText("1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,17 +166,13 @@ public class vistaConexion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jugadorLBL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(numJugadorLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jugadorLBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(numJugadorLBL, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addComponent(jugadorLBL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelIniciarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,23 +184,7 @@ public class vistaConexion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBTNActionPerformed
-        try {
-            // TODO add your handling code here:
-            numJugadorLBL.setText("...");
-            ProxyCliente pc = new ProxyCliente();
-            String respuesta = pc.mandarMensajeAlServidor("SOLICITUD");
-            System.out.println(respuesta);
-            numJugadorLBL.setText(respuesta);
-            
-            Thread.sleep(5000);
-            vistaSeleccion seleccion = new vistaSeleccion();
-            seleccion.setVisible(true);
-            this.dispose();
-        } catch (IOException ex) {
-            Logger.getLogger(vistaConexion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(vistaConexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_playBTNActionPerformed
 
     /**
@@ -262,7 +229,6 @@ public class vistaConexion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jugadorLBL;
-    private javax.swing.JLabel numJugadorLBL;
     private javax.swing.JPanel panelBusquedaContrincante;
     private javax.swing.JPanel panelIniciarJuego;
     private javax.swing.JButton playBTN;
